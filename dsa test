@@ -1,0 +1,61 @@
+1.array initialization in c language
+int arr[5] = {1, 2, 3, 4, 5};
+
+2.data structure used to implement queues
+linked list,array,structures,pointers
+
+3.type of graph that can have cycles
+Cyclic graph
+
+4.operation that removes an element from the start of queue
+Dequeue
+
+5.data structure that allows fast access of elements
+static data structure
+
+1.To prioritize shorter print jobs we can use a priority queue.
+  Each print job has priority with it, determined by its length. Shorter print jobs would have higher priority.
+  When a print job is submitted, it's added to the queue based on its priority.
+  When the printer finishes a job, it dequeues the next job from the front of the queue, which has highest priority (shortest job).
+  If there are multiple print jobs with the same priority,we can use (FIFO) policy to ensure fairness within jobs of the same length.
+
+2. For tracking the history of web pages visited by a user and allowing efficient navigation back and forth, a doubly linked list would be a suitable data structure choice. Here's how you could implement it:
+  Each node in the linked list represents a visited web page with URL and links to the previous and next nodes.
+  When a user visits a new page, you add it to the front of the linked list.
+  To go back,we move to the previous node in the list.to go forward, we move to the next node in the list.
+  To handle revisiting a page, you could either keep track of the number of times a page has been visited in each node or remove duplicates when adding a page to the history.
+  If the user opens a new page while going through the history, you would split the list at the current position and insert the new page as the next node, effectively "forgetting" the forward history from that point.
+
+class Node {
+    String url;
+    Node prev, next;
+}
+
+public class WebHistory {
+    Node current;
+
+    public void visitPage(String url) {
+        Node newNode = new Node();
+        newNode.url = url;
+        newNode.prev = current;
+        if (current != null)
+            current.next = newNode;
+        current = newNode;
+    }
+
+    public void printHistory() {
+        Node temp = current;
+        while (temp != null) {
+            System.out.println(temp.url);
+            temp = temp.prev;
+        }
+    }
+
+    public static void main(String[] args) {
+        WebHistory history = new WebHistory();
+        history.visitPage("https://example.com/page1");
+        history.visitPage("https://example.com/page2");
+        history.visitPage("https://example.com/page3");
+        history.printHistory();
+    }
+}
